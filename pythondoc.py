@@ -609,12 +609,12 @@ class ModuleParser:
         # fixup internal links
         # 1) find all named elements
         elems = {}
-        for elem in tree.getiterator():
+        for elem in tree.iter():
             name = elem.get("name")
             if name:
                 elems[name] = elem
         # 2) find all link anchors
-        for elem in tree.getiterator("a"):
+        for elem in tree.iter("a"):
             href = elem.get("href")
             if href[:5] == "link:":
                 # FIXME: add support for external links
@@ -627,7 +627,7 @@ class ModuleParser:
                     elem.set("href", href)
         if docstring:
             # look for markup in docstrings
-            for info in tree.getiterator("info"):
+            for info in tree.iter("info"):
                 docstring = info.findtext("docstring")
                 if not docstring:
                     continue
